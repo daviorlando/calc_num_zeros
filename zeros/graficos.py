@@ -1,4 +1,4 @@
-"""Gráficos (bônus): a função com as raízes encontradas e a convergência dos métodos."""
+"""Gráficos: f(x) com as raízes encontradas e a convergência de cada método."""
 
 import math
 from pathlib import Path
@@ -14,8 +14,7 @@ PONTOS_NA_CURVA = 500
 MENOR_VALOR_NO_EIXO_LOG = 1e-17  # |f| = 0 exato não aparece em escala log
 MARGEM_RELATIVA = 0.1
 
-# Cores categóricas validadas para daltonismo, em ordem fixa, uma por método.
-# Cada método também tem marcador próprio, para não depender só da cor.
+# Uma cor e um marcador por método.
 ESTILO_DOS_METODOS = {
     "Bissecção": {"color": "#2a78d6", "marker": "o"},
     "Falsa Posição": {"color": "#eb6834", "marker": "s"},
@@ -88,7 +87,7 @@ def _resultados_com_raiz(resultados: list[Resultado]) -> list[Resultado]:
 
 
 def _limites_do_eixo_x(intervalo: tuple[float, float], resultados: list[Resultado]) -> tuple[float, float]:
-    """O eixo cobre o intervalo e também raízes que ficaram fora dele."""
+    """Eixo x cobre [a, b] e as raízes que ficaram fora dele."""
     pontos = [*intervalo, *(r.raiz for r in _resultados_com_raiz(resultados))]
     inicio, fim = min(pontos), max(pontos)
     margem = (fim - inicio) * MARGEM_RELATIVA or 1.0

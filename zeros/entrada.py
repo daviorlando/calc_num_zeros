@@ -1,8 +1,7 @@
-"""Leitura e validação de tudo o que o usuário digita.
+"""Leitura e validação dos dados digitados.
 
-Funções são interpretadas com sympy, que aceita a notação usual:
-`cos(x) - x`, `20 + 90*exp(-0.15*t) - 50`, `x^2 - 2`, `0,5*x`, `sen(x)`, `ln(x)`.
-Qualquer erro de digitação vira uma mensagem amigável e a pergunta é repetida.
+f(x) é interpretada com sympy: `cos(x) - x`, `x^2 - 2`, `0,5*x`, `sen(x)`, `ln(x)`.
+Se a entrada for inválida, mostra o erro e pergunta de novo.
 """
 
 import re

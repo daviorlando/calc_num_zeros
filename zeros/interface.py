@@ -1,4 +1,4 @@
-"""Interface de terminal: menus, tabela comparativa e fluxo novo cálculo/sair."""
+"""Menus e tabelas do terminal."""
 
 from dataclasses import replace
 
@@ -120,7 +120,7 @@ def _ler_funcao_personalizada() -> ParametrosDoCalculo:
 
 
 def _editar_parametros(parametros: ParametrosDoCalculo) -> ParametrosDoCalculo:
-    """Pergunta cada dado de novo, sugerindo o valor atual como padrão (Enter mantém)."""
+    """Pergunta cada dado de novo; Enter mantém o valor atual."""
     if confirmar("Trocar a função?", padrao=False):
         return _ler_funcao_personalizada()
     if confirmar("Trocar a derivada?", padrao=False):
@@ -163,7 +163,7 @@ def _mostrar_parametros(p: ParametrosDoCalculo) -> None:
 # --- Resultados -------------------------------------------------------------
 
 def _sessao_de_calculo(parametros: ParametrosDoCalculo, problema: Problema | None) -> bool:
-    """Calcula e oferece as ações sobre o resultado. Devolve False se o usuário quiser sair."""
+    """Calcula e mostra o menu de ações. Devolve False para sair do programa."""
     while True:
         with console.status("Executando os quatro métodos..."):
             resultados = comparar_metodos(parametros)
@@ -204,7 +204,7 @@ def _escolher_acao() -> str:
 
 def _mostrar_tabela_comparativa(resultados: list[Resultado], parametros: ParametrosDoCalculo,
                                 problema: Problema | None) -> None:
-    """Verde: menos iterações e menor tempo entre os que convergiram. Linhas em vermelho: falhas."""
+    """Destaca em verde o menor nº de iterações e o menor tempo; falhas em vermelho."""
     convergiram = [r for r in resultados if r.convergiu]
     menos_iteracoes = min((r.iteracoes for r in convergiram), default=None)
     menor_tempo = min((r.tempo_ms for r in convergiram), default=None)

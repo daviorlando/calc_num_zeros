@@ -1,7 +1,6 @@
-"""Casos prontos do enunciado: exemplo de teste, Problema 1 e Problema 2.
+"""Exemplo de teste, Problema 1 e Problema 2 do enunciado.
 
-Cada caso traz os dados iniciais sugeridos e uma raiz de referência obtida
-analiticamente, usada para conferir a resposta dos métodos.
+Cada caso tem os dados iniciais e a raiz analítica, usada para conferir os métodos.
 """
 
 import math

@@ -1,7 +1,6 @@
-"""Contrato comum entre os métodos numéricos, a interface e os gráficos.
+"""Resultado devolvido pelos quatro métodos.
 
-Todo método devolve um `Resultado`; assim a interface não precisa saber
-como cada algoritmo funciona por dentro para montar a tabela comparativa.
+A tabela, a exportação e os gráficos usam só este formato.
 """
 
 from dataclasses import dataclass, field
@@ -10,7 +9,7 @@ from typing import NamedTuple
 
 
 class Mensagem(StrEnum):
-    """Situação final de um método (aparece na coluna "Status" da tabela)."""
+    """Situação final do método: convergiu ou motivo da falha."""
 
     SUCESSO = "OK"
     EXTRAPOLOU_O_INTERVALO = "OK (extrapolou o intervalo)"
@@ -27,7 +26,7 @@ MENSAGENS_DE_CONVERGENCIA = frozenset({Mensagem.SUCESSO, Mensagem.EXTRAPOLOU_O_I
 
 
 class Iteracao(NamedTuple):
-    """Um passo do método: (k, x_k, f(x_k), erro)."""
+    """Uma iteração: k, x_k, f(x_k) e |x_k − x_(k−1)|."""
 
     numero: int
     aproximacao: float

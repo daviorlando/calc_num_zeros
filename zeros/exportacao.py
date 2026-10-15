@@ -1,4 +1,4 @@
-"""Exporta a tabela comparativa em CSV e Markdown (pronta para colar no relatório)."""
+"""Exporta a tabela comparativa em CSV e Markdown."""
 
 import csv
 from datetime import datetime
@@ -30,14 +30,14 @@ def linha_da_tabela(resultado: Resultado) -> list[str]:
 
 
 def _erro_em_x(resultado: Resultado) -> str:
-    """|x_k − x_(k−1)| da última iteração, como a coluna "Erro em x" da tabela das aulas."""
+    """|x_k − x_(k−1)| da última iteração."""
     erro = resultado.historico[-1].erro if resultado.historico else None
     return "—" if erro is None else f"{erro:.3e}"
 
 
 def _salvar_csv(resultados: list[Resultado], caminho: Path) -> Path:
     with caminho.open("w", newline="", encoding="utf-8") as arquivo:
-        escritor = csv.writer(arquivo, delimiter=";")  # ";" abre direto no Excel/LibreOffice em pt-BR
+        escritor = csv.writer(arquivo, delimiter=";")  # ";" é o separador do Excel em pt-BR
         escritor.writerow(CABECALHO)
         escritor.writerows(linha_da_tabela(r) for r in resultados)
     return caminho

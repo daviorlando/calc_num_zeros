@@ -15,8 +15,7 @@ from zeros.metodos import (
 )
 from zeros.resultado import Resultado
 
-# Uma única execução leva poucos microssegundos, perto da resolução do relógio;
-# a média de muitas execuções torna o tempo comparável entre os métodos.
+# Uma execução dura poucos µs, perto da resolução do relógio; por isso usa-se a média.
 REPETICOES_PADRAO = 1000
 
 
