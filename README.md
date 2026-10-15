@@ -47,6 +47,8 @@ cálculo com outros dados, voltar ao menu ou sair.
 
 - Parada: |x_k − x_(k−1)| < ε **ou** |f(x_k)| < ε, limitado ao máximo de iterações
   (padrões: ε = 10⁻⁶, 100 iterações — iguais para os quatro métodos).
+  Usa-se o erro absoluto em x, como na aula prática (|a_k − b_k| < ε), e não o relativo
+  |(x_k − x_(k−1))/x_k| da teoria, que falha quando a raiz está perto de 0.
 - Tempo: média de N execuções (padrão 1000) medida com `time.perf_counter_ns`.
 - Falhas não interrompem o programa; aparecem em vermelho abaixo da tabela comparativa: sem mudança de sinal,
   derivada nula, divisão por zero, máx. iterações, overflow/NaN, fora do domínio de f,

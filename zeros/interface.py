@@ -17,7 +17,7 @@ from zeros.entrada import (
     ler_numero,
     ler_numero_positivo,
 )
-from zeros.exportacao import exportar_resultados, linha_da_tabela
+from zeros.exportacao import CABECALHO, exportar_resultados, linha_da_tabela
 from zeros.graficos import exibir_graficos, fechar_graficos, gerar_graficos, pode_exibir_janelas
 from zeros.problemas import PROBLEMAS, Problema
 from zeros.resultado import Resultado
@@ -212,18 +212,18 @@ def _mostrar_tabela_comparativa(resultados: list[Resultado], parametros: Paramet
 
     tabela = Table(title=f"Comparativo dos métodos — f({parametros.funcao.variavel}) = {escape(str(parametros.funcao))}",
                    title_justify="left")
-    for coluna in ("Método", "Raiz", "Iterações", "Tempo (µs)", "|f(raiz)|"):
+    for coluna in CABECALHO:
         tabela.add_column(coluna, justify="left" if coluna == "Método" else "right")
     if referencia is not None:
         tabela.add_column("|raiz − ref.|", justify="right")
 
     for resultado in resultados:
-        metodo, raiz, iteracoes, tempo, residuo = linha_da_tabela(resultado)
+        metodo, raiz, iteracoes, tempo, residuo, erro_em_x = linha_da_tabela(resultado)
         if resultado.convergiu and resultado.iteracoes == menos_iteracoes:
             iteracoes = f"[bold green]{iteracoes}[/]"
         if resultado.convergiu and resultado.tempo_ms == menor_tempo:
             tempo = f"[bold green]{tempo}[/]"
-        celulas = [metodo, raiz, iteracoes, tempo, residuo]
+        celulas = [metodo, raiz, iteracoes, tempo, residuo, erro_em_x]
         if referencia is not None:
             celulas.append(_distancia_da_referencia(resultado, referencia))
         tabela.add_row(*celulas, style=None if resultado.convergiu else "red")

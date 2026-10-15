@@ -7,7 +7,7 @@ from pathlib import Path
 from zeros.resultado import Resultado
 
 PASTA_DE_RESULTADOS = Path("resultados")
-CABECALHO = ["Método", "Raiz", "Iterações", "Tempo (µs)", "|f(raiz)|"]
+CABECALHO = ["Método", "Raiz", "Iterações", "Tempo (µs)", "|f(raiz)|", "Erro em x"]
 
 
 def exportar_resultados(resultados: list[Resultado], titulo: str,
@@ -25,7 +25,14 @@ def linha_da_tabela(resultado: Resultado) -> list[str]:
         str(resultado.iteracoes),
         f"{resultado.tempo_us:.2f}",
         "—" if resultado.residuo is None else f"{resultado.residuo:.3e}",
+        _erro_em_x(resultado),
     ]
+
+
+def _erro_em_x(resultado: Resultado) -> str:
+    """|x_k − x_(k−1)| da última iteração, como a coluna "Erro em x" da tabela das aulas."""
+    erro = resultado.historico[-1].erro if resultado.historico else None
+    return "—" if erro is None else f"{erro:.3e}"
 
 
 def _salvar_csv(resultados: list[Resultado], caminho: Path) -> Path:
